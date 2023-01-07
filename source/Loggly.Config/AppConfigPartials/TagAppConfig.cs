@@ -18,7 +18,8 @@ namespace Loggly.Config
                     // Support minimal config with a default when unspecified
                     assembly = "Loggly.Config";
                 }
-                var complexTag = (ComplexTag)Activator.CreateInstance(assembly, complexTagConfig.Type).Unwrap();
+
+                var complexTag = (ComplexTag) Activator.CreateInstance(Type.GetType(complexTagConfig.Type));
                 complexTag.Formatter = complexTagConfig.Formatter;
                 tags.Add(complexTag);
             }

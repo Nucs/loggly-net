@@ -1,14 +1,9 @@
-﻿#if !NET45
-
-namespace Loggly.Config
-{
+﻿namespace Loggly.Config {
     /// <summary>
     /// LogTransport.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.7")]
-    public enum LogTransport
-    {
-
+    public enum LogTransport {
         /// <summary>
         /// Https.
         /// </summary>
@@ -30,5 +25,3 @@ namespace Loggly.Config
         SyslogTcp,
     }
 }
-
-#endif

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.5;netstandard2.0;net45</TargetFrameworks>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <VersionPrefix>4.6.0</VersionPrefix>
 
     <Title>loggly-csharp-config</Title>
@@ -11,16 +11,11 @@
     <PackageId>loggly-csharp-config</PackageId>
     <PackageTags>loggly;syslog;logging</PackageTags>
     <PackageIcon>loggly-config.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/neutmute/loggly-csharp</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Nucs/loggly-net</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/neutmute/loggly-csharp.git</RepositoryUrl>
-    
-    <AssemblyOriginatorKeyFile>../../LogglyCsharp.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    
-    <ProjectGuid>{58A100CE-CC7E-43BF-A054-D28648F092AC}</ProjectGuid>
+    <ProjectGuid>{58A100CE-CC7E-43BF-A054-D28648F092AD}</ProjectGuid>
     <DisableImplicitFrameworkReferences Condition=" '$(TargetFramework)' == 'net45'">true</DisableImplicitFrameworkReferences>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -30,19 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.32" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net45'">
-    <Compile Remove="ConfigurationSection*.*;AppConfigPartials\*.cs" />
-  </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
     <Compile Remove="ConfigurationSection1.csd.cs" />
     <Compile Include="ConfigurationSection1.csd.cs">

@@ -19,7 +19,7 @@ namespace Loggly.Config
         public string GetName()
         {
             var newRelicAppName = ConfigurationManager.AppSettings["NewRelic.AppName"];
-            string name= null;
+            string name = null;
             if (!string.IsNullOrEmpty(LogglyAppConfig.Instance?.ApplicationName))
             {
                 name = LogglyAppConfig.Instance.ApplicationName;

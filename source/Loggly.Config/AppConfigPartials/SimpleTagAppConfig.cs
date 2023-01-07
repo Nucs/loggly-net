@@ -1,11 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace Loggly.Config; 
 
-namespace Loggly.Config
-{
-    internal partial class SimpleTagAppConfig : ITag
-    {
-    }
-}
+internal partial class SimpleTagAppConfig : ITag { }

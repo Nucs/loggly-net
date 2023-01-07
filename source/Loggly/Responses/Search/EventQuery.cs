@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Loggly.Responses
-{
-    public class EventQuery
-    {
-        public string Rsid { get; set; }
+namespace Loggly.Responses; 
 
-        public int Page { get; set; }
+public class EventQuery {
+    public string Rsid { get; set; }
 
-        public virtual IDictionary<string, object> ToParameters()
-        {
-            return new Dictionary<string, object>
-                {
-                   { "rsid", Rsid },
-                   { "page", Page }
-                };
-        }
+    public int Page { get; set; }
+
+    public virtual IDictionary<string, object> ToParameters() {
+        return new Dictionary<string, object> {
+            { "rsid", Rsid },
+            { "page", Page }
+        };
     }
 }

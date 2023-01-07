@@ -1,19 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Loggly
-{
-    public interface IMessageData
-    {
-        List<string> KeyList { get;  }
+namespace Loggly; 
 
-        object this[string key]
-        {
-            get;
-            set;
-        }
+public interface IMessageData {
+    List<string> KeyList { get; }
 
-        void AddIfAbsent(string key, object value);
-        void Add(string key, object value);
-        void Add(string key, string valueFormat, params object[] valueArgs);
-    }
+    object this[string key] { get; set; }
+
+    void AddIfAbsent(string key, object value);
+    void Add(string key, object value);
+    void Add(string key, string valueFormat, params object[] valueArgs);
 }

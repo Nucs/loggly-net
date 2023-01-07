@@ -18,6 +18,7 @@
     <ProjectGuid>{58A100CE-CC7E-43BF-A054-D28648F092AD}</ProjectGuid>
     <DisableImplicitFrameworkReferences Condition=" '$(TargetFramework)' == 'net45'">true</DisableImplicitFrameworkReferences>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

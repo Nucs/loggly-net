@@ -2,42 +2,35 @@ using System;
 using System.Collections.Generic;
 using Loggly.Config;
 
-namespace Loggly
-{
-    public enum MessageType
-    {
-        Plain,
-        Json
-    }
-    public class LogglyMessage
-    {
-        public DateTimeOffset Timestamp { get; set; }
-        public SyslogHeader Syslog { get; set; }
-        public MessageType Type { get; set; }
-        public string Content { get; set; }
+namespace Loggly; 
 
-        public List<ITag> CustomTags { get; set; }
+public enum MessageType {
+    Plain,
+    Json
+}
 
-        public LogglyMessage()
-            :this(new List<ITag>(), new SyslogHeader())
-        {
-        }
+public class LogglyMessage {
+    public DateTimeOffset Timestamp { get; set; }
+    public SyslogHeader Syslog { get; set; }
+    public MessageType Type { get; set; }
+    public string Content { get; set; }
 
-        public LogglyMessage(List<ITag> customTags, SyslogHeader syslog)
-        {
-            CustomTags = customTags;
-            Syslog = syslog;
-        }
+    public List<ITag> CustomTags { get; set; }
 
-        public override string ToString()
-        {
-            return string.Format("content={0}", Content);
-        }
+    public LogglyMessage()
+        : this(new List<ITag>(), new SyslogHeader()) { }
+
+    public LogglyMessage(List<ITag> customTags, SyslogHeader syslog) {
+        CustomTags = customTags;
+        Syslog = syslog;
     }
 
-    public enum HttpRequestType
-    {
-        Get
-        ,Post
+    public override string ToString() {
+        return string.Format("content={0}", Content);
     }
+}
+
+public enum HttpRequestType {
+    Get,
+    Post
 }

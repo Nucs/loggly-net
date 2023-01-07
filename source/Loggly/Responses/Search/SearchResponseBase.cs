@@ -1,37 +1,31 @@
 ﻿using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-namespace Loggly.Responses
-{
-    public abstract class SearchResponseBase
-    {
-        protected EntryJsonResponseBase FirstEntryResponse { get; set; }
+namespace Loggly.Responses; 
 
-        [JsonIgnore]
-        internal ISearchTransport Transport { get; set; }
+public abstract class SearchResponseBase {
+    protected EntryJsonResponseBase FirstEntryResponse { get; set; }
 
-        [JsonProperty("rsid")]
-        public Rsid Rsid { get; set; }
+    [JsonIgnore]
+    internal ISearchTransport Transport { get; set; }
 
-        [JsonIgnore]
-        public int TotalEvents
-        {
-            get
-            {
-                if (this.FirstEntryResponse == null)
-                {
-                    this.FirstEntryResponse = GetEntryJsonResponse(0).Result;
-                }
+    [JsonProperty("rsid")]
+    public Rsid Rsid { get; set; }
 
-                return this.FirstEntryResponse.TotalEvents;
+    [JsonIgnore]
+    public int TotalEvents {
+        get {
+            if (this.FirstEntryResponse == null) {
+                this.FirstEntryResponse = GetEntryJsonResponse(0).Result;
             }
-        }
 
-        protected abstract Task<EntryJsonResponseBase> GetEntryJsonResponse(int page);
-
-        public override string ToString()
-        {
-            return string.Format("Rsid={0}", Rsid);
+            return this.FirstEntryResponse.TotalEvents;
         }
+    }
+
+    protected abstract Task<EntryJsonResponseBase> GetEntryJsonResponse(int page);
+
+    public override string ToString() {
+        return string.Format("Rsid={0}", Rsid);
     }
 }

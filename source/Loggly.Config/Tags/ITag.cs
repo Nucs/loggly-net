@@ -1,7 +1,5 @@
-﻿namespace Loggly.Config
-{
-    public interface ITag
-    {
-        string Value { get; }
-    }
+﻿namespace Loggly.Config; 
+
+public interface ITag {
+    string Value { get; }
 }

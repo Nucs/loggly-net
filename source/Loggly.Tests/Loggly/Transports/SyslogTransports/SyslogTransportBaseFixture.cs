@@ -1,51 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Loggly.Config;
+﻿using Loggly.Config;
 using Loggly.Transports.Syslog;
 using NUnit.Framework;
 
-namespace Loggly.Tests.Loggly.Transports.SyslogTransports
-{
-    public class SyslogTransportBaseFixture : Fixture
-    {
-        [SetUp]
-        public void Setup()
-        {
-            LogglyConfig.Instance.TagConfig.Tags.Add(new SimpleTag {Value = "myTag"});
-            LogglyConfig.Instance.CustomerToken = "MyLogglyToken";
-        }
+namespace Loggly.Tests.Loggly.Transports.SyslogTransports; 
 
-        [Test]
-        public void SyslogContentWhenNoTags()
-        {
-            LogglyConfig.Instance.TagConfig.Tags.Clear();
+public class SyslogTransportBaseFixture : Fixture {
+    [SetUp]
+    public void Setup() {
+        LogglyConfig.Instance.TagConfig.Tags.Add(new SimpleTag { Value = "myTag" });
+        LogglyConfig.Instance.CustomerToken = "MyLogglyToken";
+    }
 
-            var transport = new SyslogTcpTransport();
-            var logglyMessage = new LogglyMessage();
+    [Test]
+    public void SyslogContentWhenNoTags() {
+        LogglyConfig.Instance.TagConfig.Tags.Clear();
 
-            logglyMessage.Content = "myContent";
+        var transport = new SyslogTcpTransport();
+        var logglyMessage = new LogglyMessage();
 
-            var syslog = transport.ConstructSyslog(logglyMessage);
+        logglyMessage.Content = "myContent";
 
-            Assert.AreEqual("[MyLogglyToken@41058] myContent", syslog.Text);
-        }
+        var syslog = transport.ConstructSyslog(logglyMessage);
 
-        [Test]
-        public void SyslogContentWithTags()
-        {
-            LogglyConfig.Instance.CustomerToken = "MyLogglyToken";
+        Assert.AreEqual("[MyLogglyToken@41058] myContent", syslog.Text);
+    }
 
-            var transport = new SyslogTcpTransport();
-            var logglyMessage = new LogglyMessage();
+    [Test]
+    public void SyslogContentWithTags() {
+        LogglyConfig.Instance.CustomerToken = "MyLogglyToken";
 
-            logglyMessage.Content = "myContent";
+        var transport = new SyslogTcpTransport();
+        var logglyMessage = new LogglyMessage();
 
-            var syslog = transport.ConstructSyslog(logglyMessage);
+        logglyMessage.Content = "myContent";
 
-            Assert.AreEqual("[MyLogglyToken@41058 tag=\"myTag\"] myContent", syslog.Text);
-        }
+        var syslog = transport.ConstructSyslog(logglyMessage);
+
+        Assert.AreEqual("[MyLogglyToken@41058 tag=\"myTag\"] myContent", syslog.Text);
     }
 }

@@ -1,60 +1,53 @@
 ﻿#if NETFRAMEWORK
 using System.Configuration;
 #endif
-using System.Linq;
+namespace Loggly.Config; 
 
-namespace Loggly.Config
-{
-    public class LogglyConfig : ILogglyConfig
-    {
-        public string ApplicationName { get; set; }
-        public string CustomerToken { get; set; }
-        public bool ThrowExceptions { get; set; }
-        public ITagConfiguration TagConfig { get; private set; }
-        public ITransportConfiguration Transport { get; set; }
-        public ISearchConfiguration Search { get; private set; }
+public class LogglyConfig : ILogglyConfig {
+    public string ApplicationName { get; set; }
+    public string CustomerToken { get; set; }
+    public bool ThrowExceptions { get; set; }
+    public ITagConfiguration TagConfig { get; private set; }
+    public ITransportConfiguration Transport { get; set; }
+    public ISearchConfiguration Search { get; private set; }
 
-        public bool IsEnabled { get;set;}
-        public bool IsValid
-        {
-            get { return !string.IsNullOrEmpty(CustomerToken); }
-        }
+    public bool IsEnabled { get; set; }
 
-        private LogglyConfig()
-        {
-            IsEnabled = true;
-            TagConfig = new TagConfiguration();
-            Transport = new TransportConfiguration();
-        }
+    public bool IsValid {
+        get { return !string.IsNullOrEmpty(CustomerToken); }
+    }
 
-        private static ILogglyConfig _instance;
+    private LogglyConfig() {
+        IsEnabled = true;
+        TagConfig = new TagConfiguration();
+        Transport = new TransportConfiguration();
+    }
 
-        public static ILogglyConfig Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-#if NETFRAMEWORK
+    private static ILogglyConfig _instance;
+
+    public static ILogglyConfig Instance {
+        get {
+            if (_instance == null) {
+                #if NETFRAMEWORK
                     if (LogglyAppConfig.Instance != null)
                     {
                         _instance = FromAppConfig();
                         return _instance;
                     }
-#endif
-                    _instance = GetNullConfig();
-                }
-                return _instance;
+                #endif
+                _instance = GetNullConfig();
             }
-            set { _instance = value; }
-        }
 
-        private static ILogglyConfig GetNullConfig()
-        {
-            return new LogglyConfig();
+            return _instance;
         }
+        set { _instance = value; }
+    }
 
-#if NETFRAMEWORK
+    private static ILogglyConfig GetNullConfig() {
+        return new LogglyConfig();
+    }
+
+    #if NETFRAMEWORK
         private static ILogglyConfig FromAppConfig()
         {
             var config = new LogglyConfig();
@@ -76,6 +69,5 @@ namespace Loggly.Config
 
             return config;
         }
-#endif
-    }
+    #endif
 }
